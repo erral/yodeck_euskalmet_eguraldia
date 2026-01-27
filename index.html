@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Euskalmeten aurreikuspenak</title>
+
+    <style type="text/css">
+      euskalmet-eguraldia {
+        --euskalmet-forecast-day-padding: 2rem 2rem;
+        --euskalmet-forecast-day-text-align: center;
+      }
+      h1 {
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+    </style>
+  </head>
+
+  <body class="container">
+    <script src="./euskalmet.js?"></script>
+
+    <section>
+      <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Eibar</h1>
+      <euskalmet-eguraldia
+        city="eibar"
+        days="3"
+        language="eu"
+        direction="row"
+        short-text="true"
+        modern-images="true"
+      >
+      </euskalmet-eguraldia>
+    </section>
+  </body>
+</html>
