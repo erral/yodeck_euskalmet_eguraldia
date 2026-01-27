@@ -1,7 +1,7 @@
 # Euskalmet Eguraldia
 
-A Yodeck app to show the weather using an [unofficial API of Euskalmet](https://github.com/codesyntax/euskalmet-eguraldi-iragarpena) kindly provided by [CodeSyntax](https://www.codesyntax.com)
+Yodeck aplikazioa eguraldia erakusteko, [CodeSyntax](https://www.codesyntax.com)-ek eskainitako [Euskalmeten API ez-ofiziala](https://github.com/codesyntax/euskalmet-eguraldi-iragarpena) erabiliz.
 
-## License
+## Lizentzia
 
 GPLv2
