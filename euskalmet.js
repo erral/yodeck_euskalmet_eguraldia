@@ -15,12 +15,60 @@ const template = document.createElement('template');
 
 template.innerHTML = `
   <style>
-    .euskalmet .euskalmet-forecast-day {
-      padding: var(--euskalmet-forecast-day-padding, 1rem 1rem);
-      text-align: var(--euskalmet-forecast-day-text-align, center)
+    :host {
+      --card-background: #f8f9fa;
+      --card-border-radius: 12px;
+      --card-padding: 1.5rem;
+      --text-color: #333;
+      --temp-min-color: #007bff;
+      --temp-max-color: #dc3545;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      display: block;
     }
-    .euskalmet-body { display: flex };
-
+    .euskalmet-body {
+      display: flex;
+      gap: 1.5rem;
+      font-family: var(--font-family);
+    }
+    .euskalmet-forecast-day {
+      background: var(--card-background);
+      border-radius: var(--card-border-radius);
+      padding: var(--euskalmet-forecast-day-padding, var(--card-padding));
+      text-align: var(--euskalmet-forecast-day-text-align, center);
+      flex: 1;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .euskalmet-forecast-day:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    .euskalmet-forecast-date {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-color);
+      margin: 0 0 1rem;
+    }
+    .euskalmet-forecast-symbol img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 0.5rem;
+    }
+    .euskalmet-forecast-symbol {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .euskalmet-forecast-temperature {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-top: 1rem;
+    }
+    .euskalmet-forecast-temperature-low {
+      color: var(--temp-min-color);
+    }
+    .euskalmet-forecast-temperature-high {
+      color: var(--temp-max-color);
+    }
   </style>
   <div class="euskalmet">
     <div class="euskalmet-inner">
@@ -85,9 +133,10 @@ class Euskalmet extends HTMLElement {
       div.className = 'euskalmet-forecast-day';
 
       let dateObject = new Date(item.date);
-      let dateText = dateObject.toLocaleDateString('eu-ES', {
-        timeZone: 'Europe/Madrid',
-      });
+      const locale = `${this.getAttribute('language') || 'eu'}-ES`;
+      const weekday = dateObject.toLocaleDateString(locale, { weekday: 'long', timeZone: 'Europe/Madrid' });
+      const day = dateObject.getDate();
+      let dateText = `${weekday} ${day}`;
       let shortText = this.shortText ? forecastText : '';
 
       let imageUrl = this.modernImages
@@ -112,7 +161,7 @@ class Euskalmet extends HTMLElement {
       </p>
 
       <p class="euskalmet-forecast-temperature">
-        <span class="euskalmet-forecast-temperature-low">${item.temperatureRange.min} ºC</span> - <span class="euskalmet-forecast-temperature-low">${item.temperatureRange.max} ºC</span>
+        <span class="euskalmet-forecast-temperature-low">${item.temperatureRange.min} ºC</span> - <span class="euskalmet-forecast-temperature-high">${item.temperatureRange.max} ºC</span>
       </p>
 
       `;
