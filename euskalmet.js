@@ -133,7 +133,7 @@ class Euskalmet extends HTMLElement {
       div.className = 'euskalmet-forecast-day';
 
       let dateObject = new Date(item.date);
-      const locale = `${this.getAttribute('language') || 'eu'}-ES`;
+      const locale = `eu-ES`;
       const weekday = dateObject.toLocaleDateString(locale, { weekday: 'long', timeZone: 'Europe/Madrid' });
       const day = dateObject.getDate();
       let dateText = `${weekday} ${day}`;
