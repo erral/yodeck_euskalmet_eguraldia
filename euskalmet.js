@@ -11,6 +11,17 @@ const AVAILABLE_LANGUAGES = {
   es: 'SPANISH',
 };
 
+const weekdays_eu = {
+  0: 'igandea',
+  1: 'astelehena',
+  2: 'asteartea',
+  3: 'asteazkena',
+  4: 'osteguna',
+  5: 'ostirala',
+  6: 'larunbata'
+};
+
+
 const template = document.createElement('template');
 
 template.innerHTML = `
@@ -133,8 +144,7 @@ class Euskalmet extends HTMLElement {
       div.className = 'euskalmet-forecast-day';
 
       let dateObject = new Date(item.date);
-      const locale = `eu-ES`;
-      const weekday = dateObject.toLocaleDateString(locale, { weekday: 'long', timeZone: 'Europe/Madrid' });
+      const weekday = weekdays_eu[dateObject.getDay()];
       const day = dateObject.getDate();
       let dateText = `${weekday} ${day}`;
       let shortText = this.shortText ? forecastText : '';
